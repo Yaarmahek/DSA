@@ -1,0 +1,208 @@
+#include<iostream>
+using namespace std;
+
+struct node{
+int data;
+struct node* next;
+struct node* prev;
+
+};
+node*head = NULL;
+node*prev =NULL;
+node*next =NULL;
+
+class DLL{
+public:
+
+ void insertBeg(){
+   cout<<"enter data:\n";
+   node* nn = new node;
+      if(head==NULL){
+        cin>>nn->data;
+        nn->next=NULL;
+        nn->prev=NULL;                  
+        head=nn;
+      }
+      else{
+        cin>>nn->data;
+        nn->next=head;
+        head->prev=nn;
+        head=nn;
+     }
+ }
+ 
+ void insertEnd(){
+   
+          node*temp = head;
+          cout<<"enter data of New Node: \n";
+          node*nn = new node;
+          nn->next = NULL;
+                 if(head == NULL){
+                   cin>>nn->data;
+                   nn->next=NULL;
+                   head=nn;
+                 }
+                 else{
+                   while(temp->next!=NULL){
+                        temp=temp->next;
+                   }
+                 cin>>nn->data;
+                 nn->next=NULL;
+                 nn->prev=temp->next;
+                 temp->next=nn;
+                   
+               }  
+   }
+
+void insertPos(){
+   //node*temp=head;
+   
+   int pos;
+   cout<<"enter position at which you want to insert node:";
+   cin>>pos;
+   
+   cout<<"enter data of new node: \n";
+   node*nn = new node;
+        if(head == NULL){
+                   cin>>nn->data;
+                   nn->next=NULL;
+                   head=nn;
+                 }
+                 else{
+                  node* nextnode=head;
+                  node*temp = head;
+                  //node* prevnode = head;
+                  
+                  for(int i=1;i<pos-1;i++){
+                  
+                     if(temp!=NULL)
+                     { 
+                       nextnode = temp->next;
+                       temp = temp->next;
+                     } 
+                  }
+                  
+                  if(temp!=NULL){
+                  
+                     cin>>nn->data;
+                     
+                     nn->next = nextnode->next;
+                     nn->prev = temp->next;
+                     temp->next=nn;
+                  }
+               } 
+}
+
+void deleteBeg(){
+    if(head==NULL){
+      cout<<"Nothing to delete\n";
+    }
+    else{
+      head=head->next;
+      cout<<"first node deleted\n";
+    }
+}
+
+void deleteEnd(){
+      node* endpos;
+      if(head==NULL){
+        cout<<"Nothing to delete\n";
+      }
+      else{
+        node*temp=head;
+        while(temp->next!=NULL){
+          endpos=temp;
+          temp=temp->next;
+        }
+        endpos->next=NULL;
+        delete temp;
+        cout<<"Last node deleted\n";
+       }  
+}
+
+void deletePos(){
+
+   node* temp =head;
+   node* nextnode;
+   int pos;
+   cout<<"enter position of node to delete:";
+   cin>>pos;
+   
+   if(head==NULL){
+      cout<<"Nothing to delete\n";
+   }
+   else{
+        node*temp = head;
+        for(int i=1;i<pos-1;i++){
+          //curr=temp;
+          temp=temp->next;
+          
+          //if(temp==curr)
+        }
+        nextnode=temp->next;
+        temp->next=nextnode->next;
+        delete nextnode;
+              
+}
+ 
+ }
+ void display(){
+  node*temp=head;
+  while(temp!=NULL){
+    cout<<temp->data<<"<->";
+    temp=temp->next;
+  }
+  cout<<"NULL \n";
+ }
+
+};
+
+int main(){
+DLL l;
+int ch;
+
+while(1){ 
+cout<<"-------MENU---------\n";
+cout<<"1.Insert At Beginning \n 2. Insert At End \n 3. Insert At Position \n 4. Delete At Begin \n 5. Delete At End \n 6. Delete At Random Pos \n 7. Display \n 8. Exit \n Enter Your Choice: \n";
+cin>>ch;
+
+
+switch(ch){
+
+case 1:
+  l.insertBeg();
+  break;
+  
+case 2:
+  l.insertEnd();
+  break;
+  
+case 3:
+  l.insertPos();
+  break;
+  
+case 4:
+  l.deleteBeg();
+  break;
+  
+case 5:
+  l.deleteEnd();
+  break;
+  
+case 6:
+  l.deletePos();
+  break;
+  
+case 7:
+  l.display();
+  break;
+  
+case  8:
+exit(0);
+
+}
+}
+
+return 0;
+}
+
