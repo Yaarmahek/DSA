@@ -1,0 +1,110 @@
+#include<iostream>
+using namespace std;
+class matrix
+{
+	public: int m1[10][10],m2[20][20];
+	int r,c,i,j,t;
+	void read()
+	{
+		t=0;
+		cout<<"enter the no of rows:"<<endl;
+		cin>>r;
+		cout<<"enter the no of columns:"<<endl;
+		cin>>c;
+		cout<<"enter elements of matrix:"<<endl;
+		for(i=0;i<r;i++)
+		{
+			for(j=0;j<c;j++)
+			{
+				cin>>m1[i][j];
+				if(m1[i][j])
+				{
+					t++;
+					m2[t][0]=i+1;
+					m2[t][1]=j+1;
+					m2[t][2]=m1[i][j];
+				}
+			}
+		}
+		m2[0][0]=r;
+		m2[0][1]=c;
+		m2[0][2]=t;
+		
+	}
+	
+	void display()
+	{
+	cout<<"matrix is:"<<endl;
+	for( int i=0;i<r;i++)
+	{
+		for(j=0;j<c;j++)
+		{
+			cout<<m1[i][j];
+		}
+		cout<<"\n";
+	}
+	}
+	
+	void triplet()
+	{
+		cout<<"sparse matrix triplet is:\n";
+		for(i=0;i<=t;i++)
+		{
+			for(j=0;j<3;j++)
+			{
+				cout<<m2[i][j]<<" ";
+			}
+			cout<<"\n";
+		
+		}
+	}
+	
+	void transpose()
+	{
+		int trans[10][5];
+		trans[0][0]=m2[0][1];
+		trans[0][1]=m2[0][0];
+		trans[0][2]=m2[0][2];
+		
+		int q=1;
+		for(i=0;i<=c;i++)
+		{
+			for(int p=1;p<=t;p++)
+			{
+				if(m2[p][1]==i)
+				{
+					trans[q][0]=m2[p][1];
+					trans[q][1]=m2[p][0];
+					trans[q][2]=m2[p][2];
+					q++;
+				}
+			}
+		}
+		cout<<"transpose"<<endl;
+		for(i=0;i<=t;i++)
+		{
+			for(j=0;j<3;j++)
+			{
+				cout<<trans[i][j]<<" ";
+			}
+			cout<<endl;
+		}
+	}
+	
+};
+
+
+int main()
+{
+	matrix m;
+	m.read();
+	m.display();
+	m.triplet();
+	m.transpose();
+	return 0;
+}
+
+
+
+
+
