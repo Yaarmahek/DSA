@@ -1,0 +1,126 @@
+#include<iostream>
+using namespace std;
+
+#define size 5
+class Cirque
+{
+	public:int Q[size],no,rear=-1, front=-1;
+		
+		
+	 void Enqueue()
+	{	
+		
+		cout<<"enter value to insert"<<endl;
+		cin>>no;
+		
+				
+		
+		if(rear==-1 && front==-1)
+		{
+			front=rear=0;
+			Q[rear]=no;
+		}
+		else if((rear+1) %size==front)
+		
+			{
+			
+				cout<<"Queue is full"<<endl;	
+			
+			}
+		else 
+			{
+				rear=(rear+1)%size;
+				
+				Q[rear]=no;
+			}
+	}
+	
+	void Dequeue()
+	{
+		
+		if(rear==-1 && front==-1)
+		{
+			cout<<"queue is empty"<<endl;
+		}
+		else if(front==rear)
+		{	
+			front=rear=-1;
+		}
+		else
+		{		
+			cout<<"delete element is:"<<Q[front]<<endl;
+			front=(front+1)%size;
+			
+		}
+		
+	}	
+	
+	void Display()
+	{
+		int i=front;
+		if(rear==-1 && front==-1)
+		{
+			cout<<"queue is empty"<<endl;
+		}
+		else
+		{	
+			cout<<"element in queue is:"<<endl;
+			while(i!=rear)
+			{
+				cout<<Q[i]<<endl;
+				i=(i+1)%size;
+			}
+			cout<<Q[rear];
+		}
+	}
+};
+
+
+int main()
+ {	
+ 	Cirque q1;
+ 	int ch,no;
+ 	
+ 	do{
+ 	cout<<"*****DISPLAY MENU****"<<endl;
+ 	cout<<"1.Enqueue"<<endl;
+ 	cout<<"2.Dequeue"<<endl;
+ 	cout<<"3.Display"<<endl;
+ 	cout<<"4.Exit"<<endl;
+ 	
+ 		cout<<"enter your choices:"<<endl;
+ 		cin>>ch;
+ 		switch(ch)
+ 		{
+ 			case 1:
+ 				
+				q1.Enqueue();
+				break;
+				
+			
+			case 2: 
+				q1.Dequeue();
+				
+				break;
+				
+			
+			case 3:
+				q1.Display();
+				break;
+				
+			
+			case 4:
+				cout<<"Exit"<<endl;
+				break;
+				
+				
+			default:
+				cout<<"Invalid choices"<<endl;
+				break;
+				
+		
+ 		
+ 		}
+ 	}while(ch!=4);
+ 	return 0;
+ }
